@@ -2,11 +2,10 @@ import { useState } from "react";
 import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 
-function filterData (searchText, restaurants) {
-    const filteredData = restaurants.filter((restaurant) => {
+function filterData (searchText, restaurantList) {
+    const filteredData = restaurantList.filter((restaurant) => {
         return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
-    }
-    );
+    });
     return filteredData;
 }
 
@@ -33,7 +32,7 @@ const Body = () => {
           className="search-btn"
           onClick={() => {
             // need to filter the data
-            const data = filterData(searchText, restaurants);
+            const data = filterData(searchText, restaurantList);
             // update the state - restaurants
             setRestaurants(data);
           }}
