@@ -1,19 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 
-function filterData (searchText, restaurants) {
-    const filteredData = restaurants.filter((restaurant) => {
-        return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
-    }
-    );
-    return filteredData;
+function filterData(searchText, restaurants) {
+  const filteredData = restaurants.filter((restaurant) => {
+    return restaurant.info.name
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
+  });
+  return filteredData;
 }
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState(restaurantList);
   const [searchText, setSearchText] = useState(""); //useState is used to create state variables
   // let searchText = 'KFC';
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65420&lng=77.23730"
+    );
+    const json = await data.json();
+    console.log(json);
+    setRestaurants(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants)
+  }
 
   return (
     <>
