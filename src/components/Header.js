@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => (
   <a href="/">
@@ -16,9 +17,18 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>Contact</li>
-          <li>About</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          {/* we could also have used anchor tag but it refreshes the page on every click but we dont want to do that, 
+          we want to get the data from client side itself and make a SINGLE PAGE APPLICATION so we have used Link*/}
           <li>Cart</li>
           <button
             onClick={() => {
