@@ -11,6 +11,9 @@
 .nav-items > ul > li {
     padding: 10px;
 }
+.nav-items > ul:last-child{
+    padding: 10px;
+}
 .logo{
     width: 100px;
     mix-blend-mode: color-burn;
@@ -27,4 +30,10 @@
 .restaurant-list { 
     display: flex;
     flex-wrap: wrap;
+}
+.shimmer-card { 
+    height: 200px;
+    width: 200px;
+    background-color: lightgray;
+    margin: 20px;
 }
