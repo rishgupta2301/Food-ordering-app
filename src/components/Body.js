@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchText, restaurants) {
   const filteredData = restaurants.filter((restaurant) => {
@@ -13,10 +14,9 @@ function filterData(searchText, restaurants) {
 }
 
 const Body = () => {
-    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [searchText, setSearchText] = useState(""); //useState is used to create state variables
-
 
   useEffect(() => {
     getRestaurants();
@@ -24,25 +24,33 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65420&lng=77.23730");
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65420&lng=77.23730"
+    );
     const json = await data.json();
     console.log(json);
-    setAllRestaurants(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants)
-    setFilteredRestaurants(json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle?.restaurants)
+    setAllRestaurants(
+      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setFilteredRestaurants(
+      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   }
-  console.log("render")
+  console.log("render");
 
-// Conditional Rendering:
-// if restaurant is empty : Shimmer UI
-// if restaurant has data: actual data UI
+  // Conditional Rendering:
+  // if restaurant is empty : Shimmer UI
+  // if restaurant has data: actual data UI
 
-//not render component (Early return):
-if(!allRestaurants) return null;
+  //not render component (Early return):
+  if (!allRestaurants) return null;
 
-// if(filteredRestaurants?.length === 0) return <h2>No matches found!!</h2>
+  // if(filteredRestaurants?.length === 0) return <h2>No matches found!!</h2>
 
-  return (
-    (allRestaurants?.length === 0) ? <Shimmer /> :
+  return allRestaurants?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="search-container">
         <input
@@ -69,12 +77,17 @@ if(!allRestaurants) return null;
         </button>
       </div>
       <div className="restaurant-list">
-        
-        {filteredRestaurants.length > 0 ? (filteredRestaurants.map((restaurant) => {
-          return (
-            <RestaurantCard {...restaurant.info} key={restaurant.info.id} />
-          );
-        })) : <h2>Not found!</h2>}
+        {filteredRestaurants.length > 0 ? (
+          filteredRestaurants.map((restaurant) => {
+            return (
+              <Link to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id} >
+                <RestaurantCard {...restaurant.info}/>
+              </Link>
+            );
+          })
+        ) : (
+          <h2>Not found!</h2>
+        )}
       </div>
     </>
   );

@@ -2,19 +2,20 @@ import React from "react";
 import ReactDom from "react-dom/client";
 import "../index.css";
 import Header from "./components/Header";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
-import Contact from "./components/Contact"
-import Error from "./components/Error"
-
+import Contact from "./components/Contact";
+import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 const AppLayout = () => {
   return (
     <>
       <Header />
-      <Outlet /> {/*children configuration are render here accordingly to the path 
+      <Outlet />{" "}
+      {/*children configuration are render here accordingly to the path 
       i.e., ALL THE CHILDREN WILL GO IN THE OUTLET */}
       <Footer />
     </>
@@ -23,25 +24,29 @@ const AppLayout = () => {
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<AppLayout/>,
+    path: "/",
+    element: <AppLayout />,
     errorElement: <Error />,
-    children:[
+    children: [
       {
-        path:"/",
-        element:<Body/>,
+        path: "/",
+        element: <Body />,
       },
       {
-        path:"/about",
-        element:<About/>,
+        path: "/about",
+        element: <About />,
       },
       {
-        path:"/contact",
-        element:<Contact/>,
+        path: "/contact",
+        element: <Contact />,
       },
-    ]
-  }
-])
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantMenu />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);
