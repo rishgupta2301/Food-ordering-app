@@ -22,9 +22,9 @@ class About extends React.Component {
           {/* <Outlet />  */}
           {/* this outlet is being used as the profile page is the children of about page which is 
             there in the config file in  App.j*/}
-          <ProfileClass name={"First child"} xyz={"xyz"} />
+          {/* <ProfileClass name={"First child"} xyz={"xyz"} /> */}
           {/* <ProfileClass name={"Second child"} xyz={"xyz"} /> */}
-          {/* <Profile name={"rishabh-function prop"} /> */}
+          <Profile name={"rishabh-function prop"} />
         </>
       );
   }
