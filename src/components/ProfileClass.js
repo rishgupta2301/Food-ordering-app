@@ -15,13 +15,19 @@ class Profile extends React.Component {
 
   async componentDidMount(){
 
-    const data = await fetch(" https://api.github.com/users/rishgupta2301");
-    const json = await data.json();
-    console.log(json);
+    // const data = await fetch(" https://api.github.com/users/rishgupta2301");
+    // const json = await data.json();
+    // console.log(json);
 
-    this.setState({
-      userInfo: json,
-    })
+    // this.setState({
+    //   userInfo: json,
+    // })
+
+    setInterval(() => {
+      console.log("heyy"); /** THIS IS THE PROBLEM OF SINGLE PAGE APPLICATION AS EVEN IF WE CHANGE THE PAGE/COMPONENT THE PAGE IS 
+      NOT RELOADING AND THERE ARE MULTIPLE SET INTERVALS AS YOU CAN SEE IN THE CONSOLE LOG AND AFTER SOMETIMES ITS LOGGING TWICE AND 
+      THRICE EVERY SECOND SO THATS WHY IT IS IMPORTANT TO UNMOUNT TO BUILD A LARGE AND SCALABLE APP */
+    }, 1000);
 
     console.log("Child - componentDidMount" + this.props.name )
   }
