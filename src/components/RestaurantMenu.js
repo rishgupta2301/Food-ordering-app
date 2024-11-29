@@ -4,7 +4,7 @@ import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
-  const { id } = useParams();
+  const { resId } = useParams();
   const [restaurant, setRestaurant] = useState(null);
  
 
@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
   }, []);
 
   async function getRestaurantInfo() {
-    const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65200&lng=77.16630&restaurantId=${id}&catalog_qa=undefined&submitAction=ENTER`
+    const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65200&lng=77.16630&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`
     );
     const json = await data.json();
     console.log(json.data);
@@ -26,7 +26,7 @@ const RestaurantMenu = () => {
   return (!restaurant) ? <Shimmer />  : (
     <div  className="menu">
     <div>
-      <h1>Restaurant id: {id}</h1>
+      <h1>Restaurant id: {resId}</h1>
       <h2>{restaurant[2]?.card?.card?.info?.name}</h2>
       <img style={{height:"500px", width:"500px"}} src={IMG_CDN_URL+restaurant[2]?.card?.card?.info?.cloudinaryImageId} />
       <h3>{restaurant[2]?.card?.card?.info?.avgRating} stars</h3>
