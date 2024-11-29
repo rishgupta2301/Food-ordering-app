@@ -3,15 +3,8 @@ import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { filterData } from "../utils/helper";
 
-function filterData(searchText, restaurants) {
-  const filteredData = restaurants.filter((restaurant) => {
-    return restaurant.info.name
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
-  });
-  return filteredData;
-}
 
 const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -24,16 +17,19 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65420&lng=77.23730"
+      // "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65420&lng=77.23730"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.713120511989953&lng=77.12344182819285"
     );
     const json = await data.json();
     console.log(json);
+    console.log("--------")
+    console.log(json?.data?.cards[4]?.card?.card)
     setAllRestaurants(
-      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   }
