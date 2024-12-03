@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react"
+// custom hook
+
+import { useState, useEffect } from "react";
+import { FETCH_MENU_URL } from "../constants";
 
 const useRestaurant = (resId) => {
-    const [restaurant, setRestaurant] = useState(null);
+  const [restaurant, setRestaurant] = useState(null);
 
+  useEffect(() => {
+    getRestaurantInfo();
+  }, []);
 
-    useEffect(() => {
-        getRestaurantInfo();
-      }, []);
-    
-      async function getRestaurantInfo() {
-        const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65200&lng=77.16630&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`
-        );
-        const json = await data.json();
-        console.log(json.data);
-        setRestaurant(json.data?.cards);
-        // console.log(restaurant?.cards[2]?.card?.card?.info?.id);
-      }
+  async function getRestaurantInfo() {
+    const data = await fetch(FETCH_MENU_URL + resId);
+    const json = await data.json();
+    console.log(json.data);
+    setRestaurant(json.data?.cards);
+    // console.log(restaurant?.cards[2]?.card?.card?.info?.id);
+  }
 
-      return restaurant;
+  return restaurant;
+};
 
-}
-
-export default useRestaurant
+export default useRestaurant;
