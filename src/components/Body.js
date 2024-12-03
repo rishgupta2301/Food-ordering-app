@@ -4,6 +4,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 
 const Body = () => {
@@ -40,6 +41,13 @@ const Body = () => {
   // if restaurant has data: actual data UI
 
   //not render component (Early return):
+
+  const online = useOnline();
+
+  if(!online){
+    return <h2>🔴 Offline, please check your internet connection!</h2>
+  }
+
   if (!allRestaurants) return null;
 
   // if(filteredRestaurants?.length === 0) return <h2>No matches found!!</h2>
