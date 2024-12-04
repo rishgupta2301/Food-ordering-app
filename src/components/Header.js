@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const Title = () => (
   <a href="/">
@@ -12,6 +13,8 @@ const Title = () => (
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isOnline = useOnline();
+
   return (
     <div className="header">
       <Title />
@@ -24,25 +27,31 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
           </li>
 
-          <li>
+          <li> 
             <Link to="/about">About</Link>
+          </li>
+          <li> 
+            <Link to="/instamart">Instamart</Link>
           </li>
           {/* we could also have used anchor tag but it refreshes the page on every click but we dont want to do that, 
           we want to get the data from client side itself and make a SINGLE PAGE APPLICATION so we have used Link*/}
           <li>Cart</li>
-          <button
-            onClick={() => {
-              if (isLoggedIn === false) {
-                setIsLoggedIn(true);
-              } else {
-                setIsLoggedIn(false);
-              }
-            }}
-          >
-            {isLoggedIn ? "Logout" : "Login"}
-          </button>
         </ul>
       </div>
+      <h1>{isOnline ? '✅' : '🔴'}</h1>
+      <button
+        onClick={() => {
+          if (isLoggedIn === false) {
+            setIsLoggedIn(true);
+          } else {
+            setIsLoggedIn(false);
+          }
+        }}
+      >
+        {isLoggedIn ? "Logout" : "Login"}
+      </button>
+      {/* </ul>
+      </div> */}
     </div>
   );
 };
