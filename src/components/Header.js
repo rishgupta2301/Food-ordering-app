@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import { logo } from "../constants";
 
 const Title = () => (
   <a href="/">
-    <img
-      className="logo"
-      src="https://lh3.googleusercontent.com/Em7AHf7XBH_RtGfCBVXz9RH8SM_pHkj3xPP-yd3cRguY1_Jc8fmqgx6WxnvGVyPV5xs5gL3HCD0FCuv6Xo4CwoY6ak4=w256-rw"
-    />
+    <img className="h-28 p-2" src={logo} />
   </a>
 );
 
@@ -16,29 +14,29 @@ const Header = () => {
   const isOnline = useOnline();
 
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-blue-50 md:bg-red-300 ">
       <Title />
       <div className="nav-items">
-        <ul>
-          <li>
+        <ul className="flex py-10">
+          <li className="px-2"> 
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li  className="px-2">
             <Link to="/contact">Contact</Link>
           </li>
 
-          <li> 
+          <li  className="px-2">
             <Link to="/about">About</Link>
           </li>
-          <li> 
+          <li  className="px-2">Cart</li>
+          <li  className="px-2">
             <Link to="/instamart">Instamart</Link>
           </li>
           {/* we could also have used anchor tag but it refreshes the page on every click but we dont want to do that, 
           we want to get the data from client side itself and make a SINGLE PAGE APPLICATION so we have used Link*/}
-          <li>Cart</li>
         </ul>
       </div>
-      <h1>{isOnline ? '✅' : '🔴'}</h1>
+      <h1>{isOnline ? "✅" : "🔴"}</h1>
       <button
         onClick={() => {
           if (isLoggedIn === false) {
