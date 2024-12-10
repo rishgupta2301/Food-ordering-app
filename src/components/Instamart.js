@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Section = ({ title, description, isVisible, setIsVisible }) => {
-//   const [isVisible, setIsVisible] = useState(false);
+  //   const [isVisible, setIsVisible] = useState(false);
   return (
     <div className="border border-black p-3 m-2">
       <h3>{title}</h3>
@@ -27,7 +27,7 @@ const Section = ({ title, description, isVisible, setIsVisible }) => {
 };
 
 const Instamart = () => {
-    const [visibleSection, setVisibleSection] = useState("")
+  const [visibleSection, setVisibleSection] = useState("");
   return (
     <div>
       <h1 className="text-3xl font-bold m-2 p-2">INSTAMART</h1>
