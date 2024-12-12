@@ -14,6 +14,8 @@ import ProfileClass from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/userContext";
 // import Instamart from "./components/Instamart";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
 const AppLayout = () => {
   const [user, setUser] = useState({
@@ -22,18 +24,20 @@ const AppLayout = () => {
   });
 
   return (
-    <UserContext.Provider
-      value={{
-        user: user,
-        setUser: setUser,
-      }}
-    >
-      <Header />
-      <Outlet />{" "}
-      {/*children configuration are render here accordingly to the path 
+    <Provider store={store}>
+      <UserContext.Provider
+        value={{
+          user: user,
+          setUser: setUser,
+        }}
+      >
+        <Header />
+        <Outlet />{" "}
+        {/*children configuration are render here accordingly to the path 
       i.e., ALL THE CHILDREN WILL GO IN THE OUTLET */}
-      <Footer />
-    </UserContext.Provider>
+        <Footer />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 

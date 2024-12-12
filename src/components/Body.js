@@ -82,7 +82,7 @@ const Body = () => {
         >
           Search
         </button>
-        <input value={user.name} onChange={
+        <input  className="mr-5" value={user.name} onChange={
           e => setUser({
             ...user,
             name: e.target.value,
