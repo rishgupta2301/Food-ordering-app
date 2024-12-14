@@ -24,20 +24,20 @@ const AppLayout = () => {
   });
 
   return (
-    <Provider store={store}>
-      <UserContext.Provider
+    <UserContext.Provider
         value={{
           user: user,
           setUser: setUser,
         }}
       >
+        <Provider store={store}>
         <Header />
         <Outlet />{" "}
         {/*children configuration are render here accordingly to the path 
       i.e., ALL THE CHILDREN WILL GO IN THE OUTLET */}
         <Footer />
-      </UserContext.Provider>
     </Provider>
+      </UserContext.Provider>
   );
 };
 
