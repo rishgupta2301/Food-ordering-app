@@ -12,6 +12,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import ProfileClass from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
+import Cart from "./components/Cart";
 import UserContext from "./utils/userContext";
 // import Instamart from "./components/Instamart";
 import { Provider } from "react-redux";
@@ -73,6 +74,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/instamart",

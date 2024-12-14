@@ -11,13 +11,11 @@ const RestaurantMenu = () => {
   const restaurant = useRestaurant(resId);
   const dispatch = useDispatch();
 
-  const handleAddItem = () => {
-    dispatch(addItem("Grapes"));
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+    // console.log(item);
   }
-  const handleRemoveItem = () => {
-    dispatch(removeItem());
-  }
-  
+
   // console.log(restaurant);
   //   const menu = restaurant[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.carousel;
 
@@ -35,24 +33,21 @@ const RestaurantMenu = () => {
         <h3>{restaurant[2]?.card?.card?.info?.avgRating} stars</h3>
         <h3>{restaurant[2]?.card?.card?.info?.areaName}</h3>
       </div>
-      <div>
-        <button className="p-2 m-5 bg-green-100" onClick={() => handleAddItem()}>
-          Add item
-        </button>
-        <button className="p-2 m-5 bg-red-100" onClick={() => handleRemoveItem()}>
-          Remove item
-        </button>
-      </div>
-      <div>
+      <div className="p-5">
         {/* restaurant[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card */}
         <h1>Menu</h1>
-        {console.log(
-          restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
+        {console.log("-------"+
+          restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
+            ?.card?.itemCards
         )}
         <ul>
           {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
             (menuItem) => {
-              return <li key={menuItem.bannerId}>{menuItem.card?.info?.name}</li>;
+              return (
+                <li key={menuItem.bannerId}>
+                  {menuItem.card?.info?.name} - <button className="p-1 bg-green-100" onClick={() => addFoodItem(menuItem)} >Add</button>{" "}
+                </li>
+              );
             }
           )}
         </ul>
