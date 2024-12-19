@@ -2,7 +2,7 @@ import React from "react";
 
 const Shimmer = () => {
   return (
-    <div className="restaurant-list">
+    <div data-testid="shimmer" className="restaurant-list">
       {Array(12)
         .fill("")
         .map((e) => (

@@ -71,7 +71,7 @@ const Body = () => {
             // searchText = e.target.value
           }}
         />
-        <button
+        <button data-testid="search-btn"
           className="p-2 m-2 bg-purple-900 text-white rounded-md hover:bg-purple-400"
           onClick={() => {
             // need to filter the data
